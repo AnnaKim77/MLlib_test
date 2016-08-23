@@ -42,7 +42,7 @@ public class RandomForest {
                         new StructField("f3", DataTypes.DoubleType, false, Metadata.empty()),
                         new StructField("f4", DataTypes.DoubleType, false, Metadata.empty()),
                         new StructField("label", DataTypes.DoubleType, false, Metadata.empty()),
-                        new StructField("features", new VectorUDT(), true, Metadata.empty()),});
+                        new StructField("features", new VectorUDT(), true, Metadata.empty())});
         Dataset<Row> df = spark.read().format("csv").schema(schema).option("header", "false").load(filename);
 
         df = df.withColumn("features",
@@ -77,6 +77,7 @@ public class RandomForest {
                 .setLabelCol("indexedLabel")
                 .setFeaturesCol("indexedFeatures");
 
+
         // Pipeline 역할: Estimator(Model fit) , Transformer(produce the dataset for the next stage)
         Pipeline pipeline = new Pipeline()
                 .setStages(new PipelineStage[]{labelIndexer, featureIndexer, rf, labelConverter});
@@ -85,7 +86,6 @@ public class RandomForest {
         // Prediction
         Dataset<Row> predictions = model.transform(testSet);
         predictions.select("predictedLabel", "label", "features").show(10);
-
         MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator()
                 .setLabelCol("indexedLabel")
                 .setPredictionCol("prediction")
