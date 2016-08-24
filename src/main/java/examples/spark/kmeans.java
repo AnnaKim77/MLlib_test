@@ -44,6 +44,7 @@ public class kmeans {
         KMeansModel model = kmeans.fit(df);
 
         double SSE = model.computeCost(df);
+        System.out.println("Within Sum of Square Error : " + SSE);
 
         Vector[] centers = model.clusterCenters();
         System.out.println("cluster centers :");
