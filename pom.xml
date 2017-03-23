@@ -12,15 +12,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <properties>
-        <spark.version>2.0.0</spark.version>
+        <spark.version>2.1.0</spark.version>
         <scala.version>2.11.8</scala.version>
         <scala.binary.version>2.11</scala.binary.version>
     </properties>
